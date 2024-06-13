@@ -1,0 +1,19 @@
+.scroll-top {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    color: #D1D618;
+    border: 2px solid #ffffff;
+    background-color:#D1D618;
+    border-radius: 100%;
+    cursor: pointer;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    display: none;
+    z-index: 999;
+}
+
+.scroll-top.is-active {
+    display: block;
+}

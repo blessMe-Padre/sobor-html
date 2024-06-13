@@ -1,0 +1,105 @@
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+
+/* Импорт кастомных стилей для компонентов */
+@import './block/button.css';
+@import './block/menu-button.css';
+@import './block/menu.css';
+@import './block/swiper.css';
+@import './block/sliders.css';
+@import './block/scrool-top.css';
+@import './block/header.css';
+@import './block/social-icon.css';
+
+
+/* Импорт TailWind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Зарегистрируйте пользовательское семейство шрифтов и сообщите браузеру, где его найти. */
+/* @font-face {
+    font-family: 'archangelsk';
+    src: url('../src/fonts/archangelsk.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+} */
+:root {
+    --main-black: #303030;
+    --default-black: #000000;
+    --brown: #D8D2C2;
+    --light-brown: #EDEBE5;
+    --dark-brown: #A99F8A;
+    --orange: #DBBA61;
+}
+
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: "Onest", sans-serif;
+        color: #303030;
+        background: linear-gradient(166deg, #FFF 5.27%, rgba(255, 255, 255, 0.00) 78.75%);
+        font-weight: 400;
+    }
+}
+
+@layer components {
+    .container {
+        @apply max-w-[1440px]
+    }
+}
+
+/* Директивы классов */
+
+.link {
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: var(--orange);
+}
+
+
+/* Прочие классы */
+
+.lock {
+    overflow: hidden;
+}
+
+.lock::before {
+    overflow: hidden;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+}

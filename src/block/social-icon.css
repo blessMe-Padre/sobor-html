@@ -1,0 +1,16 @@
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--brown);
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: var(--orange);
+}

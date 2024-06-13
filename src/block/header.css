@@ -1,0 +1,29 @@
+.header {
+    padding: 20px 0;
+}
+
+.header__nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header__nav a {
+    font-family: "TT Norms", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #303030;
+    transition: color 0.3s ease;
+}
+
+.header__nav a:hover {
+    color: var(--orange);
+}
+
+@media (max-width: 1023px) {
+    .header__nav {
+        display: none;
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>Храм Покрова Пресвятой Богородицы</title>
+    <!-- <link rel="stylesheet" href="css/swiper-bundle.min.css"> -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/baguetteBox.min.css">
+    <link rel=" stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="h-screen grid grid-rows-[auto_1fr_auto]">
+        <header class="z-10 w-full md-28 transition-colors">
+            <div class="container flex gap-5 items-center justify-between md:pt-2 mb-7">
+                <button class="btn-close-menu md:hidden">
+                    <svg viewBox="0 0 64 48">
+                        <path d="M19,15 L45,15 C70,15 58,-2 49.0177126,7 L19,37"></path>
+                        <path d="M19,24 L45,24 C61.2371586,24 57,49 41,33 L32,24"></path>
+                        <path d="M45,33 L19,33 C-8,33 6,-2 22,14 L45,37"></path>
+                    </svg>
+                </button>
+                <div>
+               <p class="text-lg font-bold">г. Владивосток, Океанский проспект, 44</p>
+                    <p>Пн-Сб: 08:00 - 19:00</p>
+                </div>
+                <img loading="lazy" src="./src/img/logo.svg" width="367" height="105" alt="лого">
+                <div class="flex items-center justify-center gap-7">
+                    <a class="text-lg font-bold link" href="tel:+74232402628">8 (423) 2-40-26-28</a>
+                    <div class="flex items-center gap-3">
+                        <a class="social-icon" href="http://t.me/pokrovadv/37" target="_blank" rel="noopener noreferrer">
+                            <img src="./src/img/icons/telegram.svg" width="22" height="22" alt="телеграм">
+                        </a>
+                        <a class="social-icon" href="https://vk.com/pokrovadv" target="_blank" rel="noopener noreferrer">
+                            <img src="./src/img/icons/vk.svg" width="24" height="24" alt="вконтакте">
+                        </a>
+                     </div>
+                </div>
+            </div>
+            <div class="container">
+                <nav class="header__nav">
+                    <ul>
+                        <li><a class="link" href="#">О храме</a></li>
+                        <li><a class="link" href="#">История храма</a></li>
+                        <li><a class="link" href="#">События</a></li>
+                        <li><a class="link" href="#">Требы</a></li>
+                        <li><a class="link" href="#">Библиотека</a></li>
+                        <li><a class="link" href="#">Воскресная школа</a></li>
+                        <li><a class="link" href="#">Социальное служение</a></li>
+                        <li><a class="link" href="#">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- мобильное меню -->
+            <div class="flex flex-col items-start justify-between pt-20 overflow-hidden md:hidden">
+                <div class="mobile-menu">
+                    <ul>
+                        <li><a class="link" href="#">О храме</a></li>
+                        <li><a class="link" href="#">История храма</a></li>
+                        <li><a class="link" href="#">События</a></li>
+                        <li><a class="link" href="#">Требы</a></li>
+                        <li><a class="link" href="#">Библиотека</a></li>
+                        <li><a class="link" href="#">Воскресная школа</a></li>
+                        <li><a class="link" href="#">Социальное служение</a></li>
+                        <li><a class="link" href="#">Контакты</a></li>
+                    </ul>
+                    <div>
+                        <p class="text-lg font-bold">г. Владивосток, Океанский проспект, 44</p>
+                        <p class="mb-5">Пн-Сб: 08:00 - 19:00</p>
+                    </div>
+                   
+                    <a class="text-lg font-bold link block mb-5" href="tel:+74232402628">8 (423) 2-40-26-28</a>
+                    <div class="flex items-center gap-3">
+                        <a class="social-icon" href="http://t.me/pokrovadv/37" target="_blank" rel="noopener noreferrer">
+                            <img src="./src/img/icons/telegram.svg" width="22" height="22" alt="телеграм">
+                        </a>
+                        <a class="social-icon" href="https://vk.com/pokrovadv" target="_blank" rel="noopener noreferrer">
+                            <img src="./src/img/icons/vk.svg" width="24" height="24" alt="вконтакте">
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="visually-hidden">алиса знает, что делать</h1>
+            <canvas id="canvas" class="noise"></canvas>
+        </main>
+
+        <footer class="py-12 wow fadeInUp">
+            <h2 class="visually-hidden">Контакты</h2>
+            <div class="container">
+                <div class="flex items-center justify-between flex-col sm:flex-row">
+                    <p class="mb-3">Алиса знает, что делать <span class="data-span"></span> г. Все права защищены</p>
+                    <!-- <p class="mb-3">Политика конфиденциальности</p> -->
+                    <a class="hover:text-blue transition-colors mb-3" href="http://inside360.ru" target="_blank">Сделано
+                        в INSIDE360</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="scroll-top">
+        <img src="./src/img/up-arrow.svg" alt="стрелка вверх">
+    </div>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/baguettebox.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
