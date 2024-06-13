@@ -12,6 +12,7 @@
     background: #fff;
     transition: all 0.7s ease;
     transform: translateX(-100%);
+    z-index: 30px;
 }
 
 .mobile-menu.is-active {
@@ -27,4 +28,10 @@
 
 .mobile-menu li {
     margin-bottom: 20px;
+}
+
+@media (max-width: 560px) {
+    .mobile-menu {
+        width: 80%;
+    }
 }

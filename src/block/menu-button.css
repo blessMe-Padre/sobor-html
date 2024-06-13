@@ -72,3 +72,9 @@
 .btn-close-menu.active svg path:nth-child(3) {
     --offset: 58px;
 }
+
+@media (max-width: 1023px) {
+    .btn-close-menu {
+        width: 38px;
+    }
+}

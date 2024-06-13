@@ -26,4 +26,14 @@
     .header__nav {
         display: none;
     }
+
+    .header__logo {
+        width: 209px;
+    }
+}
+
+@media (max-width: 560px) {
+    .header__logo {
+        width: 150px;
+    }
 }

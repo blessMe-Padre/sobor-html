@@ -9,6 +9,7 @@ export const initNav = () => {
         menuButton.classList.toggle('active');
         mobileMenu.classList.toggle('is-active');
         body.classList.toggle('lock');
+        body.classList.toggle('is-active');
     });
 
     mobileMenuLinks.forEach(link => {
@@ -17,6 +18,20 @@ export const initNav = () => {
             menuButton.classList.remove('active');
             mobileMenu.classList.remove('is-active');
             body.classList.remove('lock');
+        });
+    });
+
+    document.querySelector('#canvas').addEventListener('click', (evt) => {
+        menuButton.classList.remove('active');
+        mobileMenu.classList.remove('is-active');
+        body.classList.remove('is-active');
+    });
+
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuButton.classList.remove('active');
+            mobileMenu.classList.remove('is-active');
+            body.classList.remove('is-active');
         });
     });
 }
