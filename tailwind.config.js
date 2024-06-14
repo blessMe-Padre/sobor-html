@@ -23,7 +23,8 @@ module.exports = {
       'light-brown': '#EDEBE5',
       'dark-brown': '#A99F8A',
       'orange': '#DBBA61',
-      'light-gray': '#c5c1b6;',
+      'light-gray': '#c5c1b6',
+      'light': '#f7f5f0',
     },
 
     container: {

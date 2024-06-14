@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
 /* Импорт шрифтов */
 
 /* Импорт кастомных стилей для компонентов */
@@ -965,7 +967,7 @@ button.swiper-pagination-bullet{
   text-transform: uppercase;
   color: #303030;
   font-size: clamp(1.5rem, 0.928rem + 2.441vw, 3.125rem);
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .news {
@@ -1013,6 +1015,16 @@ button.swiper-pagination-bullet{
   .news__list {
     margin-bottom: 50px;
   }
+}
+
+.time {
+  padding: 50px 0;
+}
+
+.time__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
 }
 
 /* Импорт TailWind */
@@ -1738,7 +1750,8 @@ body {
 }
 
 .text-light-gray{
-  color: #c5c1b6;;
+  --tw-text-opacity: 1;
+  color: rgb(197 193 182 / var(--tw-text-opacity));
 }
 
 .text-orange{
@@ -1918,10 +1931,6 @@ body {
 }
 
 @media (min-width: 768px){
-  .sm\:block{
-    display: block;
-  }
-
   .sm\:flex{
     display: flex;
   }
