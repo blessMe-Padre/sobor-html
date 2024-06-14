@@ -11,6 +11,8 @@
 @import './block/scrool-top.css';
 @import './block/header.css';
 @import './block/social-icon.css';
+@import './block/hero.css';
+@import './block/title.css';
 
 
 /* Импорт TailWind */
@@ -33,6 +35,7 @@
     --light-brown: #EDEBE5;
     --dark-brown: #A99F8A;
     --orange: #DBBA61;
+    --white: #ffffff;
 }
 
 
@@ -110,4 +113,16 @@
     width: 100%;
     height: 100vh;
     opacity: 1;
+}
+
+.swiper-slide {
+    height: auto;
+}
+
+.decor-section {
+    height: 105px;
+    background-image: url('../src/img/bg/1.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin-top: -250px;
 }

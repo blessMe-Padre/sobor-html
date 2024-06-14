@@ -1,0 +1,8 @@
+.title {
+    font-family: "Onest", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #303030;
+    font-size: clamp(1.5rem, 0.928rem + 2.441vw, 3.125rem);
+    line-height: 1.1;
+}
