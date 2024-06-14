@@ -968,6 +968,33 @@ button.swiper-pagination-bullet{
   line-height: 1.1;
 }
 
+.news {
+  padding-top: 200px;
+}
+
+.news__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.news__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.news__description {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Импорт TailWind */
 
 /* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */
@@ -1601,10 +1628,6 @@ body {
   height: 100vh;
 }
 
-.min-h-screen{
-  min-height: 100vh;
-}
-
 .w-0{
   width: 0px;
 }
@@ -1800,6 +1823,58 @@ body {
   background-repeat: no-repeat;
   background-position: bottom;
   margin-top: -250px;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 110px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background-color: var(--brown);
+  border-radius: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: var(--orange);
+}
+
+.swiper-button-prev:hover img,
+.swiper-button-next:hover img {
+  transition: transform 0.3s ease;
+}
+
+.swiper-button-prev:hover img {
+  transform: translateX(-5px);
+}
+
+.swiper-button-next:hover img {
+  transform: translateX(5px);
+}
+
+.image-wrapper {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper img:hover {
+  transform: scale(1.1);
 }
 
 @media (min-width: 729px){
