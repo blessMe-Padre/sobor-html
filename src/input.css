@@ -178,3 +178,9 @@
 .image-wrapper img:hover {
     transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+    .decor-section {
+        display: none;
+    }
+}

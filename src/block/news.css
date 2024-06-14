@@ -1,5 +1,6 @@
 .news {
     padding-top: 200px;
+    padding-bottom: 40px;
 }
 
 .news__header {
@@ -7,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .news__item {
@@ -23,4 +24,23 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.news__item h3 {
+    font-family: "Onest", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #303030;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 769px) {
+    .news__item h3 {
+        font-size: 16px;
+    }
+
+    .news__list {
+        margin-bottom: 50px;
+    }
 }
