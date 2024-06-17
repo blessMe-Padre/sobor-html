@@ -17,6 +17,7 @@
 @import './block/title.css';
 @import './block/news.css';
 @import './block/time.css';
+@import './block/footer.css';
 
 
 /* Импорт TailWind */
@@ -129,6 +130,14 @@
     background-repeat: no-repeat;
     background-position: bottom;
     margin-top: -250px;
+}
+
+.decor-section-2 {
+    height: 105px;
+    background-image: url('../src/img/bg/2.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-top: 0;
 }
 
 .button-wrapper {
