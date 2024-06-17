@@ -43,6 +43,10 @@
     z-index: 50;
 }
 
+.time__image iframe {
+    border-radius: 30px;
+}
+
 @media (max-width: 1023px) {
     .time__header {}
 
@@ -60,6 +64,6 @@
     }
 
     .time__block {
-        margin-top: 100px;
+        margin-top: 50px;
     }
 }

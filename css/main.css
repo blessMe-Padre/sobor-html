@@ -1062,6 +1062,10 @@ button.swiper-pagination-bullet{
   z-index: 50;
 }
 
+.time__image iframe {
+  border-radius: 30px;
+}
+
 @media (max-width: 1023px) {
   .time__header {
   }
@@ -1080,7 +1084,7 @@ button.swiper-pagination-bullet{
   }
 
   .time__block {
-    margin-top: 100px;
+    margin-top: 50px;
   }
 }
 
@@ -1089,6 +1093,16 @@ button.swiper-pagination-bullet{
 }
 
 .footer__wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.footer__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 /* Импорт TailWind */
@@ -1810,6 +1824,15 @@ body {
 
 .font-bold{
   font-weight: 700;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.text-brown{
+  --tw-text-opacity: 1;
+  color: rgb(216 210 194 / var(--tw-text-opacity));
 }
 
 .text-light-gray{
