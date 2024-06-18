@@ -1,6 +1,7 @@
 export const initCalendar = () => {
-    let date = '2024-06-17';
+    let date = '2024-06-18';
 
+    // Изображения
     function clearImgTags(imgs) {
         return imgs.map(tag => {
             let match = tag.match(/<img[^>]+>/);
@@ -8,6 +9,7 @@ export const initCalendar = () => {
         });
     }
 
+    // Дата
     function extractToday(htmlString) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
@@ -16,11 +18,18 @@ export const initCalendar = () => {
         return todayContent;
     }
 
+    // Заголовки
     function extractTitle(htmlString) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
         const titleDiv = doc.querySelector('.main-block > p');
-        return titleDiv;
+        const links = titleDiv.querySelectorAll('a');
+        let titleArrays = [];
+        links.forEach(link => {
+            titleArrays.push(link.innerText);
+        });
+
+        return titleArrays;
     }
 
     async function fetchData(date) {
@@ -40,7 +49,7 @@ export const initCalendar = () => {
 
     // fetchData(date).then(data => {
     //     let cleanImgs = clearImgTags(data.imgs);
-    //     let imageList = document.querySelector('.image-list');
+    //     let imageList = document.querySelector('.holiday-image-list');
     //     cleanImgs.forEach(imgTag => {
     //         let li = document.createElement('li');
     //         li.innerHTML = imgTag;
@@ -53,8 +62,14 @@ export const initCalendar = () => {
     //     console.log(cleanDate);
     // });
 
-    fetchData(date).then(data => {
-        const cleanTitle = extractTitle(data.presentations);
-        console.log(cleanTitle);
-    });
+    // fetchData(date).then(data => {
+    //     const cleanTitle = extractTitle(data.presentations);
+    //     const daysTitle = document.querySelector('.holiday-titles');
+
+    //     cleanTitle.forEach(item => {
+    //         let li = document.createElement('li');
+    //         li.innerText = item;
+    //         daysTitle.appendChild(li);
+    //     });
+    // });
 }
