@@ -3,6 +3,7 @@ import { initSlider } from "./module/sliders.js";
 import { initCurrentYear } from "./module/current-year.js";
 import { initScrollToTop } from "./module/scroll-to-top.js";
 import { initScroll } from "./module/scroll.js";
+// import { initHoliday } from "./module/holiday.js";
 import { initCalendar } from "./module/calendar.js";
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initCurrentYear();
     initScrollToTop();
     initScroll();
+    // initHoliday();
     initCalendar();
     baguetteBox.run('.gallery-wrapper');
 
@@ -94,5 +96,5 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    noise()
+    noise();
 });

@@ -1,5 +1,158 @@
 export const initCalendar = () => {
-    let date = '2024-06-19';
+
+    // Дни недели с понедельника
+    const DaysOfWeek = ['Пн', 'Вт', 'Ср', 'Чтв', 'Пт', 'Сб', 'Вс'];
+
+    // Месяцы начиная с января
+    const Months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+
+    // Получить элемент по id
+    const getId = id => document.getElementById(id);
+
+    const createCalendar = (divId) => {
+        let d = new Date();
+        let currMonth = d.getMonth();
+        let currYear = d.getFullYear();
+        let currDay = d.getDate();
+
+        const showMonth = (y, m) => {
+            const firstDayOfMonth = new Date(y, m, 1).getDay();
+            const lastDateOfMonth = new Date(y, m + 1, 0).getDate();
+            const lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+
+            let html = '<table>';
+            html += '<thead><tr>';
+            html += '<td colspan="7" class="header-date">' + Months[m] + ' ' + y + '</td>';
+            html += '</tr></thead>';
+
+            html += '<tr class="days">';
+            DaysOfWeek.forEach(day => {
+                html += '<td>' + day + '</td>';
+            });
+            html += '</tr>';
+
+            let i = 1;
+            do {
+                let dow = new Date(y, m, i).getDay();
+
+                if (dow === 1) {
+                    html += '<tr>';
+                } else if (i === 1) {
+                    html += '<tr>';
+                    let k = lastDayOfLastMonth - firstDayOfMonth + 1;
+                    for (let j = 0; j < firstDayOfMonth; j++) {
+                        html += '<td class="cell not-current">' + k + '</td>';
+                        k++;
+                    }
+                }
+
+                const chk = new Date();
+                const chkY = chk.getFullYear();
+                const chkM = chk.getMonth();
+                if (chkY === currYear && chkM === currMonth && i === currDay) {
+                    html += '<td class="cell today">' + i + '</td>';
+                } else {
+                    html += '<td class="cell normal">' + i + '</td>';
+                }
+
+                if (dow === 0) {
+                    html += '</tr>';
+                } else if (i === lastDateOfMonth) {
+                    let k = 1;
+                    for (dow; dow < 7; dow++) {
+                        html += '<td class="not-current">' + k + '</td>';
+                        k++;
+                    }
+                }
+
+                i++;
+            } while (i <= lastDateOfMonth);
+
+            html += '</table>';
+
+            getId(divId).innerHTML = html;
+        };
+
+        const formatDate = (headerDateValue) => {
+            const months = {
+                "Январь": "01",
+                "Февраль": "02",
+                "Март": "03",
+                "Апрель": "04",
+                "Май": "05",
+                "Июнь": "06",
+                "Июль": "07",
+                "Август": "08",
+                "Сентябрь": "09",
+                "Октябрь": "10",
+                "Ноябрь": "11",
+                "Декабрь": "12"
+            };
+
+            const [month, year] = headerDateValue.split(' ');
+            const formattedMonth = months[month];
+
+            if (!formattedMonth) {
+                throw new Error('Invalid month format');
+            }
+
+            return `${year}-${formattedMonth}`;
+        }
+
+        const addCurrentDate = () => {
+            const dayCell = document.querySelectorAll('.cell');
+            dayCell.forEach(element => {
+                element.addEventListener('click', (evt) => {
+                    const headerDate = document.querySelector('.header-date');
+                    const headerDateValue = headerDate.innerHTML;
+
+                    const formattedDate = formatDate(headerDateValue);
+
+                    let currentDay = evt.target.innerHTML;
+
+                    if (currentDay < 10) {
+                        localStorage.setItem('date', formattedDate + '-' + '0' + currentDay);
+                    } else {
+                        localStorage.setItem('date', formattedDate + '-' + currentDay);
+                    }
+                    console.log(currentDay);
+                });
+            });
+        };
+
+        const nextMonth = () => {
+            if (currMonth === 11) {
+                currMonth = 0;
+                currYear++;
+            } else {
+                currMonth++;
+            }
+            showMonth(currYear, currMonth);
+        };
+
+        const previousMonth = () => {
+            if (currMonth === 0) {
+                currMonth = 11;
+                currYear--;
+            } else {
+                currMonth--;
+            }
+            showMonth(currYear, currMonth);
+        };
+
+        showMonth(currYear, currMonth);
+
+        getId('btnNext').onclick = nextMonth;
+        getId('btnPrev').onclick = previousMonth;
+        addCurrentDate();
+    };
+
+    createCalendar("divCal");
+
+
+    // ===================================================================================================
+
+    let date = '2024-06-20';
 
     // Изображения
     function clearImgTags(imgs) {
@@ -69,21 +222,21 @@ export const initCalendar = () => {
     //     });
     // });
 
-    // fetchData(date).then(data => {
-    //     const cleanDate = extractToday(data.presentations);
-    //     console.log(cleanDate);
-    // });
+    fetchData(date).then(data => {
+        const cleanDate = extractToday(data.presentations);
+        console.log(cleanDate);
+    });
 
-    // fetchData(date).then(data => {
-    //     const cleanTitle = extractTitle(data.presentations);
-    //     const daysTitle = document.querySelector('.holiday-titles');
+    fetchData(date).then(data => {
+        const cleanTitle = extractTitle(data.presentations);
+        const daysTitle = document.querySelector('.holiday-titles');
 
-    //     cleanTitle.forEach(item => {
-    //         let li = document.createElement('li');
-    //         li.innerText = item;
-    //         daysTitle.appendChild(li);
-    //     });
-    // });
+        cleanTitle.forEach(item => {
+            let li = document.createElement('li');
+            li.innerText = item;
+            daysTitle.appendChild(li);
+        });
+    });
 
     fetchData(date).then(data => {
         const cleanTitle = extractTitle(data.presentations);
@@ -95,4 +248,7 @@ export const initCalendar = () => {
             daysTitle.appendChild(li);
         });
     });
-}
+
+    // TODO добавить цитату дня 
+
+};
