@@ -73,33 +73,7 @@ export const initCalendar = () => {
             getId(divId).innerHTML = html;
         };
 
-        const formatDate = (headerDateValue) => {
-            const months = {
-                "Январь": "01",
-                "Февраль": "02",
-                "Март": "03",
-                "Апрель": "04",
-                "Май": "05",
-                "Июнь": "06",
-                "Июль": "07",
-                "Август": "08",
-                "Сентябрь": "09",
-                "Октябрь": "10",
-                "Ноябрь": "11",
-                "Декабрь": "12"
-            };
-
-            const [month, year] = headerDateValue.split(' ');
-            const formattedMonth = months[month];
-
-            if (!formattedMonth) {
-                throw new Error('Invalid month format');
-            }
-
-            return `${year}-${formattedMonth}`;
-        }
-
-        const addCurrentDate = () => {
+        const dateHandler = () => {
             const dayCell = document.querySelectorAll('.cell');
             dayCell.forEach(element => {
                 element.addEventListener('click', (evt) => {
@@ -107,15 +81,15 @@ export const initCalendar = () => {
                     const headerDateValue = headerDate.innerHTML;
 
                     const formattedDate = formatDate(headerDateValue);
-
                     let currentDay = evt.target.innerHTML;
-
-                    if (currentDay < 10) {
-                        localStorage.setItem('date', formattedDate + '-' + '0' + currentDay);
-                    } else {
-                        localStorage.setItem('date', formattedDate + '-' + currentDay);
-                    }
                     console.log(currentDay);
+                    const daysTitle = document.querySelector('.holiday-titles');
+
+                    removeAllChildren(daysTitle);
+
+                    let date = formattedDate + '-' + currentDay;
+                    console.log(date);
+                    addHolidayContent(date);
                 });
             });
         };
@@ -128,6 +102,7 @@ export const initCalendar = () => {
                 currMonth++;
             }
             showMonth(currYear, currMonth);
+            dateHandler();
         };
 
         const previousMonth = () => {
@@ -138,13 +113,14 @@ export const initCalendar = () => {
                 currMonth--;
             }
             showMonth(currYear, currMonth);
+            dateHandler();
         };
 
         showMonth(currYear, currMonth);
 
         getId('btnNext').onclick = nextMonth;
         getId('btnPrev').onclick = previousMonth;
-        addCurrentDate();
+        dateHandler();
     };
 
     createCalendar("divCal");
@@ -152,103 +128,135 @@ export const initCalendar = () => {
 
     // ===================================================================================================
 
-    let date = '2024-06-20';
+    function addHolidayContent(date) {
 
-    // Изображения
-    function clearImgTags(imgs) {
-        return imgs.map(tag => {
-            let match = tag.match(/<img[^>]+>/);
-            return match ? match[0] : '';
-        });
-    }
-
-    // Дата
-    function extractToday(htmlString) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const todayDiv = doc.querySelector('.today');
-        let todayContent = todayDiv.innerText;
-        return todayContent;
-    }
-
-    // Заголовки
-    function extractTitle(htmlString) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const titleDiv = doc.querySelector('.main-block > p');
-        const links = titleDiv.querySelectorAll('a');
-        let titleArrays = [];
-        links.forEach(link => {
-            titleArrays.push(link.innerText);
-        });
-
-        return titleArrays;
-    }
-    // Контент
-    function extractTitle(htmlString) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const titleDiv = doc.querySelector('.main-block > p:nth-child(2)');
-        const links = titleDiv.querySelectorAll('a');
-        let ContentArrays = [];
-        links.forEach(link => {
-            ContentArrays.push(link.innerText);
-        });
-        return ContentArrays;
-    }
-
-    async function fetchData(date) {
-        try {
-            const response = await fetch(`https://azbyka.ru/days/widgets/presentations.json?image=1&date=${date}`);
-            if (!response.ok) {
-                throw new Error('Ошибка ' + response.statusText);
+        async function fetchData(date) {
+            try {
+                const response = await fetch(`https://azbyka.ru/days/widgets/presentations.json?image=1&date=${date}`);
+                if (!response.ok) {
+                    throw new Error('Ошибка ' + response.statusText);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Ошибка с запросом:', error);
             }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Ошибка с запросом:', error);
+        }
+
+        // Изображения
+        function clearImgTags(imgs) {
+            return imgs.map(tag => {
+                let match = tag.match(/<img[^>]+>/);
+                return match ? match[0] : '';
+            });
+        }
+
+        // Дата
+        function extractToday(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const todayDiv = doc.querySelector('.today');
+            let todayContent = todayDiv.innerText;
+            return todayContent;
+        }
+
+        // Заголовки
+        function extractTitle(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const titleDiv = doc.querySelector('.main-block > p');
+            const links = titleDiv.querySelectorAll('a');
+            let titleArrays = [];
+            links.forEach(link => {
+                titleArrays.push(link.innerText);
+            });
+
+            return titleArrays;
+        }
+        // Контент
+        function extractTitle(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const titleDiv = doc.querySelector('.main-block > p:nth-child(2)');
+            const links = titleDiv.querySelectorAll('a');
+            let ContentArrays = [];
+            links.forEach(link => {
+                ContentArrays.push(link.innerText);
+            });
+            return ContentArrays;
+        }
+
+        // Вызов функций ==========================================================
+
+        // fetchData(date).then(data => {
+        //     let cleanImgs = clearImgTags(data.imgs);
+        //     let imageList = document.querySelector('.holiday-image-list');
+        //     cleanImgs.forEach(imgTag => {
+        //         let li = document.createElement('li');
+        //         li.innerHTML = imgTag;
+        //         imageList.appendChild(li);
+        //     });
+        // });
+
+        // fetchData(date).then(data => {
+        //     const cleanDate = extractToday(data.presentations);
+        //     console.log(cleanDate);
+        // });
+
+        fetchData(date).then(data => {
+            const daysTitle = document.querySelector('.holiday-titles');
+            const cleanTitle = extractTitle(data.presentations);
+            cleanTitle.forEach(item => {
+                let li = document.createElement('li');
+                li.innerText = item;
+                daysTitle.appendChild(li);
+            });
+        });
+
+        // fetchData(date).then(data => {
+        //     const cleanTitle = extractTitle(data.presentations);
+        //     const daysTitle = document.querySelector('.holiday-content');
+
+        //     cleanTitle.forEach(item => {
+        //         let li = document.createElement('li');
+        //         li.innerText = item;
+        //         daysTitle.appendChild(li);
+        //     });
+        // });
+
+        // TODO добавить цитату дня 
+    }
+
+    //  утилиты =======================================================================================
+    function removeAllChildren(element) {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
         }
     }
 
-    // Вызов функций ==========================================================
+    function formatDate(headerDateValue) {
+        const months = {
+            "Январь": "01",
+            "Февраль": "02",
+            "Март": "03",
+            "Апрель": "04",
+            "Май": "05",
+            "Июнь": "06",
+            "Июль": "07",
+            "Август": "08",
+            "Сентябрь": "09",
+            "Октябрь": "10",
+            "Ноябрь": "11",
+            "Декабрь": "12"
+        };
 
-    // fetchData(date).then(data => {
-    //     let cleanImgs = clearImgTags(data.imgs);
-    //     let imageList = document.querySelector('.holiday-image-list');
-    //     cleanImgs.forEach(imgTag => {
-    //         let li = document.createElement('li');
-    //         li.innerHTML = imgTag;
-    //         imageList.appendChild(li);
-    //     });
-    // });
+        const [month, year] = headerDateValue.split(' ');
+        const formattedMonth = months[month];
 
-    fetchData(date).then(data => {
-        const cleanDate = extractToday(data.presentations);
-        console.log(cleanDate);
-    });
+        if (!formattedMonth) {
+            throw new Error('Invalid month format');
+        }
 
-    fetchData(date).then(data => {
-        const cleanTitle = extractTitle(data.presentations);
-        const daysTitle = document.querySelector('.holiday-titles');
-
-        cleanTitle.forEach(item => {
-            let li = document.createElement('li');
-            li.innerText = item;
-            daysTitle.appendChild(li);
-        });
-    });
-
-    fetchData(date).then(data => {
-        const cleanTitle = extractTitle(data.presentations);
-        const daysTitle = document.querySelector('.holiday-content');
-
-        cleanTitle.forEach(item => {
-            let li = document.createElement('li');
-            li.innerText = item;
-            daysTitle.appendChild(li);
-        });
-    });
-
-    // TODO добавить цитату дня 
-
+        return `${year}-${formattedMonth}`;
+    }
 };
