@@ -1,20 +1,27 @@
 export const initCalendar = () => {
 
-    // Дни недели с понедельника
     const DaysOfWeek = ['Пн', 'Вт', 'Ср', 'Чтв', 'Пт', 'Сб', 'Вс'];
-
-    // Месяцы начиная с января
     const Months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
-    // Получить элемент по id
     const getId = id => document.getElementById(id);
 
-    const createCalendar = (divId) => {
-        let d = new Date();
-        let currMonth = d.getMonth();
-        let currYear = d.getFullYear();
-        let currDay = d.getDate();
 
+    let d = new Date();
+    let currMonth = d.getMonth();
+    let currYear = d.getFullYear();
+    let currDay = d.getDate();
+
+    let firstDate;
+
+    if (currMonth < 10) {
+        firstDate = currYear + '-' + '0' + currMonth + '-' + currDay;
+    } else {
+        firstDate = currYear + '-' + currMonth + '-' + currDay;
+    }
+
+    addHolidayContent(firstDate);
+
+    const createCalendar = (divId) => {
         const showMonth = (y, m) => {
             const firstDayOfMonth = new Date(y, m, 1).getDay();
             const lastDateOfMonth = new Date(y, m + 1, 0).getDate();
@@ -125,7 +132,6 @@ export const initCalendar = () => {
 
     createCalendar("divCal");
 
-
     // ===================================================================================================
 
     function addHolidayContent(date) {
@@ -141,6 +147,34 @@ export const initCalendar = () => {
             } catch (error) {
                 console.error('Ошибка с запросом:', error);
             }
+        }
+
+        async function fetchDataQuote(date) {
+            try {
+                const response = await fetch(`https://azbyka.ru/days/${date}`);
+                if (!response.ok) {
+                    throw new Error('Ошибка ' + response.statusText);
+                }
+                const data = await response.json();
+                // let result = JSON.stringify(data);
+                console.log(result);
+                return data;
+            } catch (error) {
+                console.error('Ошибка с запросом:', error);
+            }
+        }
+
+        // Цитата дня
+
+        function extractQuote(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const quoteDiv = doc.querySelector('.quote-of-day p');
+            let quoteContent = quoteDiv.innerText;
+
+            console.log(quoteContent);
+
+            return quoteContent;
         }
 
         // Изображения
@@ -187,6 +221,11 @@ export const initCalendar = () => {
         }
 
         // Вызов функций ==========================================================
+
+        fetchDataQuote(date).then(data => {
+            const cleanQuot = extractQuote(data);
+            console.log(cleanQuot);
+        });
 
         // fetchData(date).then(data => {
         //     let cleanImgs = clearImgTags(data.imgs);
