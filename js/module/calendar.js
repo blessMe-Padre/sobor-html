@@ -1,5 +1,5 @@
 export const initCalendar = () => {
-    let date = '2024-06-20';
+    let date = '2024-06-17';
 
     function clearImgTags(imgs) {
         return imgs.map(tag => {
@@ -8,6 +8,20 @@ export const initCalendar = () => {
         });
     }
 
+    function extractToday(htmlString) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const todayDiv = doc.querySelector('.today');
+        let todayContent = todayDiv.innerText;
+        return todayContent;
+    }
+
+    function extractTitle(htmlString) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const titleDiv = doc.querySelector('.main-block > p');
+        return titleDiv;
+    }
 
     async function fetchData(date) {
         try {
@@ -16,22 +30,31 @@ export const initCalendar = () => {
                 throw new Error('Ошибка ' + response.statusText);
             }
             const data = await response.json();
-            console.log(data);
             return data;
         } catch (error) {
             console.error('Ошибка с запросом:', error);
         }
     }
 
+    // Вызов функций ==========================================================
 
-    // Вызов функций
+    // fetchData(date).then(data => {
+    //     let cleanImgs = clearImgTags(data.imgs);
+    //     let imageList = document.querySelector('.image-list');
+    //     cleanImgs.forEach(imgTag => {
+    //         let li = document.createElement('li');
+    //         li.innerHTML = imgTag;
+    //         imageList.appendChild(li);
+    //     });
+    // });
+
+    // fetchData(date).then(data => {
+    //     const cleanDate = extractToday(data.presentations);
+    //     console.log(cleanDate);
+    // });
+
     fetchData(date).then(data => {
-        let cleanImgs = clearImgTags(data.imgs);
-        let imageList = document.querySelector('.image-list');
-        cleanImgs.forEach(imgTag => {
-            let li = document.createElement('li');
-            li.innerHTML = imgTag;
-            imageList.appendChild(li);
-        });
+        const cleanTitle = extractTitle(data.presentations);
+        console.log(cleanTitle);
     });
 }
