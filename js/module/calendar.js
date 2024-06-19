@@ -14,9 +14,9 @@ export const initCalendar = () => {
     let firstDate;
 
     if (currMonth < 10) {
-        firstDate = currYear + '-' + '0' + currMonth + '-' + currDay;
+        firstDate = currYear + '-' + '0' + (currMonth + 1) + '-' + currDay;
     } else {
-        firstDate = currYear + '-' + currMonth + '-' + currDay;
+        firstDate = currYear + '-' + (currMonth + 1) + '-' + currDay;
     }
 
     addHolidayContent(firstDate);
@@ -155,26 +155,30 @@ export const initCalendar = () => {
                 if (!response.ok) {
                     throw new Error('Ошибка ' + response.statusText);
                 }
-                const data = await response.json();
-                // let result = JSON.stringify(data);
-                console.log(result);
-                return data;
+                const html = await response.text();
+                return html;
+
             } catch (error) {
                 console.error('Ошибка с запросом:', error);
             }
         }
-
         // Цитата дня
-
         function extractQuote(htmlString) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlString, 'text/html');
             const quoteDiv = doc.querySelector('.quote-of-day p');
             let quoteContent = quoteDiv.innerText;
 
-            console.log(quoteContent);
-
             return quoteContent;
+        }
+        // Цитата дня имя
+        function extractQuoteAuthor(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const quoteDivLink = doc.querySelector('.quote-of-day a');
+            const quoteDivLinkValue = quoteDivLink.innerText;
+
+            return quoteDivLinkValue;
         }
 
         // Изображения
@@ -221,11 +225,17 @@ export const initCalendar = () => {
         }
 
         // Вызов функций ==========================================================
-
         fetchDataQuote(date).then(data => {
             const cleanQuot = extractQuote(data);
-            console.log(cleanQuot);
+            const cleanQuotName = extractQuoteAuthor(data);
+
+            const daysQuot = document.querySelector('.quote');
+            const daysQuotName = document.querySelector('.quote-name');
+            daysQuot.innerText = cleanQuot;
+            daysQuotName.innerText = cleanQuotName;
         });
+
+
 
         // fetchData(date).then(data => {
         //     let cleanImgs = clearImgTags(data.imgs);
