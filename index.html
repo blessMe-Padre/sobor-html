@@ -17,7 +17,7 @@
 </head>
 
 <!-- TODO class="lock-before" -->
-<body class="lock-before1">
+<body class="lock-before">
     <div class="h-screen grid grid-rows-[auto_1fr_auto]">
         <header class="z-10 w-full md-28 transition-colors">
             <div class="container flex gap-1 xs:gap-5 items-center justify-between py-5 mb-7">
@@ -94,44 +94,6 @@
         <main>
             <h1 class="visually-hidden">Храм Покрова Пресвятой Богородицы г.Владивосток</h1>
             <!-- <canvas id="canvas" class="noise"></canvas> -->
-
-            <section class="calendar bg-light-brown">
-                <div class="container">
-                    <h2 class="title mb-8">ПРАВОСЛАВНЫЙ ЦЕРКОВНЫЙ КАЛЕНДАРЬ</h2>
-                    <div class="calendar__wrapper">
-                        <div class="calendar__item">
-                            <div class="calendar-wrapper relative z-50">
-                                <div class="flex items-center justify-between gap-5 mb-5 calendar-button-wrapper">
-                                    <button id="btnPrev" type="button">
-                                        <img src="./src/img/icons/arrow-left.svg" alt="">
-                                    </button>
-                                    <button id="btnNext" type="button">
-                                        <img src="./src/img/icons/arrow-right.svg" alt="">
-                                    </button>
-                                </div>
-                                <div id="divCal"></div>
-                            </div>
-                            <div class="qoute-block">
-                                <p class="text-xl uppercase font-bold sm:mb-4 md:mb-7">Цитата дня</p>
-                                <p class="sm:text-sm md:text-lg sm:mb-4 md:mb-7 quote"></p>
-                                <p class="quote-name">свт. Тихон Задонский</p>
-                            </div>
-                        </div>
-
-                        <div class="w-0 min-w-full relative">    
-                            <div class="icon-swiper swiper">
-                                <ul class="swiper-wrapper justify-items-stretch holiday-image-list"></ul>
-                            </div>
-                            <p class="calendar-today">00 июня 2024</p>
-                            <h3 class="holiday-shadow"></h3>
-                            <ul class="holiday-titles"></ul>
-                            <ul class="holiday-content"></ul>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-             
 
             <section class="hero">
                 <div class="container">
@@ -230,6 +192,43 @@
                                     <img src="./src/img/icons/arrow-right.svg" width="15" height="10" alt="">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="calendar bg-light-brown">
+                <div class="container">
+                    <h2 class="title mb-8">ПРАВОСЛАВНЫЙ ЦЕРКОВНЫЙ КАЛЕНДАРЬ</h2>
+                    <div class="calendar__wrapper">
+                        <div class="calendar__item">
+                            <div class="calendar-wrapper relative z-50">
+                                <div class="flex items-center justify-between gap-5 mb-5 calendar-button-wrapper">
+                                    <button id="btnPrev" type="button">
+                                        <img src="./src/img/icons/arrow-left.svg" alt="">
+                                    </button>
+                                    <button id="btnNext" type="button">
+                                        <img src="./src/img/icons/arrow-right.svg" alt="">
+                                    </button>
+                                </div>
+                                <div id="divCal"></div>
+                            </div>
+                            <div class="qoute-block">
+                                <p class="text-xl uppercase font-bold sm:mb-4 md:mb-7">Цитата дня</p>
+                                <p class="sm:text-sm md:text-lg sm:mb-4 md:mb-7 quote"></p>
+                                <p class="quote-name">свт. Тихон Задонский</p>
+                            </div>
+                        </div>
+
+                        <div class="w-0 min-w-full relative">    
+                            <div class="icon-swiper swiper">
+                                <ul class="swiper-wrapper justify-items-stretch holiday-image-list"></ul>
+                            </div>
+                            <p class="calendar-today">00 июня 2024</p>
+                            <h3 class="holiday-shadow"></h3>
+                            <ul class="holiday-titles"></ul>
+                            <ul class="holiday-content"></ul>
+
                         </div>
                     </div>
                 </div>
