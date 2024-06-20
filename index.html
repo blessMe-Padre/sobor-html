@@ -93,16 +93,22 @@
             
         <main>
             <h1 class="visually-hidden">Храм Покрова Пресвятой Богородицы г.Владивосток</h1>
-            <!-- <canvas id="canvas" class="noise"></canvas> -->
+            <canvas id="canvas" class="noise"></canvas>
 
-            <section class="calendar">
+            <section class="calendar bg-light-brown">
                 <div class="container">
                     <h2 class="title mb-8">ПРАВОСЛАВНЫЙ ЦЕРКОВНЫЙ КАЛЕНДАРЬ</h2>
                     <div class="calendar__wrapper">
-                        <div>
+                        <div class="calendar__item">
                             <div class="calendar-wrapper relative z-50">
-                                <button id="btnPrev" type="button">Предыдущий</button>
-                                <button id="btnNext" type="button">Следующий</button>
+                                <div class="flex items-center justify-between gap-5 mb-5 calendar-button-wrapper">
+                                    <button id="btnPrev" type="button">
+                                        <img src="./src/img/icons/arrow-left.svg" alt="">
+                                    </button>
+                                    <button id="btnNext" type="button">
+                                        <img src="./src/img/icons/arrow-right.svg" alt="">
+                                    </button>
+                                </div>
                                 <div id="divCal"></div>
                             </div>
                             <div class="qoute-block">
@@ -117,7 +123,7 @@
                                 <ul class="swiper-wrapper justify-items-stretch holiday-image-list"></ul>
                             </div>
                             <p class="calendar-today">00 июня 2024</p>
-
+                            <h3 class="holiday-shadow"></h3>
                             <ul class="holiday-titles"></ul>
                             <ul class="holiday-content"></ul>
 

@@ -64,7 +64,7 @@ export const initSlider = () => {
             slidesPerView: 3,
             speed: 2000,
             autoplay: {
-                delay: 2000,
+                delay: 5000,
             },
 
             breakpoints: {

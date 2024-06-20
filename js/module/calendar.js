@@ -218,11 +218,7 @@ export const initCalendar = () => {
         });
     };
 
-
-
-
     // ===================================================================================================
-
 
     function addHolidayContent(date) {
 
@@ -234,7 +230,6 @@ export const initCalendar = () => {
                     throw new Error('Ошибка ' + response.statusText);
                 }
                 const data = await response.json();
-                console.log(data);
                 return data;
             } catch (error) {
                 console.error('Ошибка с запросом:', error);
@@ -255,18 +250,28 @@ export const initCalendar = () => {
             }
         }
 
-
         // Обработка ответов =============================================
-
         // Цитата дня
         function extractQuote(htmlString) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlString, 'text/html');
             const quoteDiv = doc.querySelector('.quote-of-day p');
             let quoteContent = quoteDiv.innerText;
-
             return quoteContent;
         }
+
+        function extractShadow(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const quoteDiv = doc.querySelector('.shadow');
+            let quoteHtml = quoteDiv.innerHTML;
+            const cleanText = quoteHtml.replace(/<br\s*\/?>/gi, ' ')
+                .replace(/<[^>]+>/g, '')
+                .replace(/&nbsp;/g, ' ');
+            console.log(cleanText);
+            return cleanText;
+        }
+
         // Цитата дня имя
         function extractQuoteAuthor(htmlString) {
             const parser = new DOMParser();
@@ -318,21 +323,26 @@ export const initCalendar = () => {
             });
             return ContentArrays;
         }
-
         // Вызов функций и отрисовка DOM элементов  ==========================================================
+
         fetchDataQuote(date).then(data => {
             const cleanQuot = extractQuote(data);
             const cleanQuotName = extractQuoteAuthor(data);
+            const cleanShadow = extractShadow(data);
 
             const daysQuot = document.querySelector('.quote');
             const daysQuotName = document.querySelector('.quote-name');
+            const holidayShadow = document.querySelector('.holiday-shadow');
             daysQuot.innerText = cleanQuot;
             daysQuotName.innerText = cleanQuotName;
+            holidayShadow.innerText = cleanShadow;
         });
 
         fetchData(date).then(data => {
+
             let cleanImgs = clearImgTags(data.imgs);
             let imageList = document.querySelector('.holiday-image-list');
+            removeAllChildren(imageList);
             cleanImgs.forEach(imgTag => {
                 let li = document.createElement('li');
                 li.classList.add('swiper-slide');
@@ -367,7 +377,6 @@ export const initCalendar = () => {
                 daysTitle.appendChild(li);
             });
         });
-
     }
 
     //  утилиты =======================================================================================
