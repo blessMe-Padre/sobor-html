@@ -54,4 +54,33 @@ export const initSlider = () => {
             }
         });
     }
+
+    // слайдер "Иконы в календаре"
+    const calendarSection = document.querySelector('.calendar');
+    if (calendarSection) {
+        const feedback = new Swiper('.icon-swiper', {
+            loop: true,
+            spaceBetween: 10,
+            slidesPerView: 3,
+            speed: 2000,
+            autoplay: {
+                delay: 2000,
+            },
+
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                },
+                767: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                },
+
+                1023: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+            }
+        });
+    }
 }

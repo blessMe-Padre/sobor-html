@@ -83,3 +83,61 @@ thead td {
     color: #28283b;
     font-weight: bold;
 }
+
+.calendar {
+    padding: 70px 0;
+}
+
+.calendar__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+.holiday-image-list li {
+    background-color: rgb(216, 213, 213);
+    border-radius: 30px;
+    max-height: 371px;
+}
+
+.holiday-image-list {
+    margin-bottom: 40px;
+}
+
+.holiday-image-list li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.calendar-today {
+    font-family: "Onest", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #dbba61;
+    margin-bottom: 30px;
+}
+
+.quote-name {
+    font-family: "Caveat", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #bcb5a2;
+}
+
+.holiday-titles {
+    font-family: "Onest", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+}
+
+.holiday-content li {
+    font-family: "Onest", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #303030;
+    margin-bottom: 10px;
+}

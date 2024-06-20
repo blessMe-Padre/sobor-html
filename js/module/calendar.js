@@ -84,18 +84,22 @@ export const initCalendar = () => {
             const dayCell = document.querySelectorAll('.cell');
             dayCell.forEach(element => {
                 element.addEventListener('click', (evt) => {
+
+                    dayCell.forEach(item => {
+                        item.classList.remove('today');
+                    });
+
+                    element.classList.add('today');
                     const headerDate = document.querySelector('.header-date');
                     const headerDateValue = headerDate.innerHTML;
 
                     const formattedDate = formatDate(headerDateValue);
                     let currentDay = evt.target.innerHTML;
-                    console.log(currentDay);
                     const daysTitle = document.querySelector('.holiday-titles');
 
                     removeAllChildren(daysTitle);
 
                     let date = formattedDate + '-' + currentDay;
-                    console.log(date);
                     addHolidayContent(date);
                 });
             });
@@ -136,6 +140,7 @@ export const initCalendar = () => {
 
     function addHolidayContent(date) {
 
+        // запросы к api и сайту
         async function fetchData(date) {
             try {
                 const response = await fetch(`https://azbyka.ru/days/widgets/presentations.json?image=1&date=${date}`);
@@ -143,6 +148,7 @@ export const initCalendar = () => {
                     throw new Error('Ошибка ' + response.statusText);
                 }
                 const data = await response.json();
+                console.log(data);
                 return data;
             } catch (error) {
                 console.error('Ошибка с запросом:', error);
@@ -162,6 +168,10 @@ export const initCalendar = () => {
                 console.error('Ошибка с запросом:', error);
             }
         }
+
+
+        // Обработка ответов =============================================
+
         // Цитата дня
         function extractQuote(htmlString) {
             const parser = new DOMParser();
@@ -176,8 +186,7 @@ export const initCalendar = () => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlString, 'text/html');
             const quoteDivLink = doc.querySelector('.quote-of-day a');
-            const quoteDivLinkValue = quoteDivLink.innerText;
-
+            const quoteDivLinkValue = quoteDivLink ? quoteDivLink.innerText : 'свт. Тихон Задонский';
             return quoteDivLinkValue;
         }
 
@@ -224,7 +233,7 @@ export const initCalendar = () => {
             return ContentArrays;
         }
 
-        // Вызов функций ==========================================================
+        // Вызов функций и отрисовка DOM элементов  ==========================================================
         fetchDataQuote(date).then(data => {
             const cleanQuot = extractQuote(data);
             const cleanQuotName = extractQuoteAuthor(data);
@@ -235,22 +244,22 @@ export const initCalendar = () => {
             daysQuotName.innerText = cleanQuotName;
         });
 
+        fetchData(date).then(data => {
+            let cleanImgs = clearImgTags(data.imgs);
+            let imageList = document.querySelector('.holiday-image-list');
+            cleanImgs.forEach(imgTag => {
+                let li = document.createElement('li');
+                li.classList.add('swiper-slide');
+                li.innerHTML = imgTag;
+                imageList.appendChild(li);
+            });
+        });
 
-
-        // fetchData(date).then(data => {
-        //     let cleanImgs = clearImgTags(data.imgs);
-        //     let imageList = document.querySelector('.holiday-image-list');
-        //     cleanImgs.forEach(imgTag => {
-        //         let li = document.createElement('li');
-        //         li.innerHTML = imgTag;
-        //         imageList.appendChild(li);
-        //     });
-        // });
-
-        // fetchData(date).then(data => {
-        //     const cleanDate = extractToday(data.presentations);
-        //     console.log(cleanDate);
-        // });
+        fetchData(date).then(data => {
+            const cleanDate = extractToday(data.presentations);
+            const toDay = document.querySelector('.calendar-today');
+            toDay.innerHTML = cleanDate
+        });
 
         fetchData(date).then(data => {
             const daysTitle = document.querySelector('.holiday-titles');
@@ -262,18 +271,17 @@ export const initCalendar = () => {
             });
         });
 
-        // fetchData(date).then(data => {
-        //     const cleanTitle = extractTitle(data.presentations);
-        //     const daysTitle = document.querySelector('.holiday-content');
+        fetchData(date).then(data => {
+            const cleanTitle = extractTitle(data.presentations);
+            const daysTitle = document.querySelector('.holiday-content');
 
-        //     cleanTitle.forEach(item => {
-        //         let li = document.createElement('li');
-        //         li.innerText = item;
-        //         daysTitle.appendChild(li);
-        //     });
-        // });
+            cleanTitle.forEach(item => {
+                let li = document.createElement('li');
+                li.innerText = item;
+                daysTitle.appendChild(li);
+            });
+        });
 
-        // TODO добавить цитату дня 
     }
 
     //  утилиты =======================================================================================

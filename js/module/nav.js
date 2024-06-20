@@ -4,6 +4,7 @@ export const initNav = () => {
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuButton = document.querySelector('.btn-close-menu');
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+    const noiseSection = document.querySelector('#noise-section');
 
     menuButton.addEventListener('click', e => {
         menuButton.classList.toggle('active');
@@ -21,11 +22,13 @@ export const initNav = () => {
         });
     });
 
-    document.querySelector('#canvas').addEventListener('click', (evt) => {
-        menuButton.classList.remove('active');
-        mobileMenu.classList.remove('is-active');
-        body.classList.remove('is-active');
-    });
+    if (noiseSection) {
+        noiseSection.addEventListener('click', (evt) => {
+            menuButton.classList.remove('active');
+            mobileMenu.classList.remove('is-active');
+            body.classList.remove('is-active');
+        });
+    }
 
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', () => {
