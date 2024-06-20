@@ -200,3 +200,7 @@ thead td {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 490px) {
+    .calendar-wrapper {}
+}

@@ -1085,6 +1085,7 @@ button.swiper-pagination-bullet{
 
   .time__block {
     margin-top: 50px;
+    padding: 30px 10px;
   }
 }
 
@@ -1362,6 +1363,11 @@ thead td {
 @media (max-width: 729px) {
   .calendar__wrapper {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 490px) {
+  .calendar-wrapper {
   }
 }
 
@@ -1954,6 +1960,10 @@ body {
   max-width: 1440px;
 }
 
+.fixed{
+  position: fixed;
+}
+
 .relative{
   position: relative;
 }
@@ -1984,6 +1994,10 @@ body {
 
 .mb-8{
   margin-bottom: 2rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
 }
 
 .block{
@@ -2073,6 +2087,11 @@ body {
 .bg-light-brown{
   --tw-bg-opacity: 1;
   background-color: rgb(237 235 229 / var(--tw-bg-opacity));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .py-5{
@@ -2320,6 +2339,14 @@ body {
 
   .sm\:pt-20{
     padding-top: 5rem;
+  }
+
+  .sm\:pt-24{
+    padding-top: 6rem;
+  }
+
+  .sm\:pt-28{
+    padding-top: 7rem;
   }
 
   .sm\:text-sm{
