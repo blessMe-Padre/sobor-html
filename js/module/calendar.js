@@ -268,7 +268,6 @@ export const initCalendar = () => {
             const cleanText = quoteHtml.replace(/<br\s*\/?>/gi, ' ')
                 .replace(/<[^>]+>/g, '')
                 .replace(/&nbsp;/g, ' ');
-            console.log(cleanText);
             return cleanText;
         }
 

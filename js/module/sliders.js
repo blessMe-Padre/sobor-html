@@ -67,20 +67,20 @@ export const initSlider = () => {
                 delay: 5000,
             },
 
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                767: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
-                },
+            // breakpoints: {
+            //     320: {
+            //         slidesPerView: 1,
+            //     },
+            //     767: {
+            //         slidesPerView: 2,
+            //         spaceBetween: 15,
+            //     },
 
-                1023: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                },
-            }
+            //     1023: {
+            //         slidesPerView: 3,
+            //         spaceBetween: 20,
+            //     },
+            // }
         });
     }
 }
