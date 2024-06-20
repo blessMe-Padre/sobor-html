@@ -1,10 +1,177 @@
 export const initCalendar = () => {
 
-    const DaysOfWeek = ['Пн', 'Вт', 'Ср', 'Чтв', 'Пт', 'Сб', 'Вс'];
-    const Months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    var Cal = function (divId) {
 
-    const getId = id => document.getElementById(id);
+        //Сохраняем идентификатор div
+        this.divId = divId;
 
+        // Дни недели с понедельника
+        this.DaysOfWeek = [
+            'Пн',
+            'Вт',
+            'Ср',
+            'Чт',
+            'Пт',
+            'Сб',
+            'Вс'
+        ];
+
+        // Месяцы начиная с января
+        this.Months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+
+        //Устанавливаем текущий месяц, год
+        var d = new Date();
+
+        this.currMonth = d.getMonth('9');
+        this.currYear = d.getFullYear('22');
+        this.currDay = d.getDate('3');
+
+    };
+
+    // Переход к следующему месяцу
+    Cal.prototype.nextMonth = function () {
+        if (this.currMonth == 11) {
+            this.currMonth = 0;
+            this.currYear = this.currYear + 1;
+        }
+        else {
+            this.currMonth = this.currMonth + 1;
+        }
+        this.showcurr();
+    };
+
+    // Переход к предыдущему месяцу
+    Cal.prototype.previousMonth = function () {
+        if (this.currMonth == 0) {
+            this.currMonth = 11;
+            this.currYear = this.currYear - 1;
+        }
+        else {
+            this.currMonth = this.currMonth - 1;
+        }
+        this.showcurr();
+    };
+
+    // Показать текущий месяц
+    Cal.prototype.showcurr = function () {
+        this.showMonth(this.currYear, this.currMonth);
+    };
+
+    // Показать месяц (год, месяц)
+    Cal.prototype.showMonth = function (y, m) {
+        var d = new Date()
+            // Первый день недели в выбранном месяце 
+            , firstDayOfMonth = new Date(y, m, 7).getDay()
+            // Последний день выбранного месяца
+            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            // Последний день предыдущего месяца
+            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+
+
+        var html = '<table>';
+
+        // Запись выбранного месяца и года
+        html += '<thead><tr>';
+        html += '<td colspan="7" class="header-date">' + this.Months[m] + ' ' + y + '</td>';
+        html += '</tr></thead>';
+
+
+        // заголовок дней недели
+        html += '<tr class="days">';
+        for (var i = 0; i < this.DaysOfWeek.length; i++) {
+            html += '<td class="cell">' + this.DaysOfWeek[i] + '</td>';
+        }
+        html += '</tr>';
+
+        // Записываем дни
+        var i = 1;
+        do {
+
+            var dow = new Date(y, m, i).getDay();
+
+            // Начать новую строку в понедельник
+            if (dow == 1) {
+                html += '<tr>';
+            }
+
+            // Если первый день недели не понедельник показать последние дни предидущего месяца
+            else if (i == 1) {
+                html += '<tr>';
+                var k = lastDayOfLastMonth - firstDayOfMonth + 1;
+                for (var j = 0; j < firstDayOfMonth; j++) {
+                    html += '<td class="cell not-current">' + k + '</td>';
+                    k++;
+                }
+            }
+
+            // Записываем текущий день в цикл
+            var chk = new Date();
+            var chkY = chk.getFullYear();
+            var chkM = chk.getMonth();
+            if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
+                html += '<td class="cell today">' + i + '</td>';
+            } else {
+                html += '<td class="cell normal">' + i + '</td>';
+            }
+            // закрыть строку в воскресенье
+            if (dow == 0) {
+                html += '</tr>';
+            }
+            // Если последний день месяца не воскресенье, показать первые дни следующего месяца
+            else if (i == lastDateOfMonth) {
+                var k = 1;
+                for (dow; dow < 7; dow++) {
+                    html += '<td class="cell not-current">' + k + '</td>';
+                    k++;
+                }
+            }
+
+            i++;
+        } while (i <= lastDateOfMonth);
+
+        // Конец таблицы
+        html += '</table>';
+
+        // Записываем HTML в div
+        document.getElementById(this.divId).innerHTML = html;
+    };
+
+    // При загрузке окна
+    // Начать календарь
+    var c = new Cal("divCal");
+    c.showcurr();
+
+    // Привязываем кнопки «Следующий» и «Предыдущий»
+    getId('btnNext').onclick = function () {
+        c.nextMonth();
+        dateHandler();
+    };
+    getId('btnPrev').onclick = function () {
+        c.previousMonth();
+        dateHandler();
+    };
+
+    const dayCell = document.querySelectorAll('.cell');
+    dayCell.forEach(element => {
+        element.addEventListener('click', (evt) => {
+            dayCell.forEach(item => {
+                item.classList.remove('today');
+            });
+
+            element.classList.add('today');
+            const headerDate = document.querySelector('.header-date');
+            const headerDateValue = headerDate.innerHTML;
+
+            const formattedDate = formatDate(headerDateValue);
+            let currentDay = evt.target.innerHTML;
+            const daysTitle = document.querySelector('.holiday-titles');
+
+            removeAllChildren(daysTitle);
+
+            let date = formattedDate + '-' + currentDay;
+            addHolidayContent(date);
+        });
+    });
 
     let d = new Date();
     let currMonth = d.getMonth();
@@ -21,122 +188,41 @@ export const initCalendar = () => {
 
     addHolidayContent(firstDate);
 
-    const createCalendar = (divId) => {
-        const showMonth = (y, m) => {
-            const firstDayOfMonth = new Date(y, m, 1).getDay();
-            const lastDateOfMonth = new Date(y, m + 1, 0).getDate();
-            const lastDayOfLastMonth = m === 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+    // Получить элемент по id
+    function getId(id) {
+        return document.getElementById(id);
+    }
 
-            let html = '<table>';
-            html += '<thead><tr>';
-            html += '<td colspan="7" class="header-date">' + Months[m] + ' ' + y + '</td>';
-            html += '</tr></thead>';
+    const dateHandler = () => {
+        const dayCell = document.querySelectorAll('.cell');
+        dayCell.forEach(element => {
+            element.addEventListener('click', (evt) => {
 
-            html += '<tr class="days">';
-            DaysOfWeek.forEach(day => {
-                html += '<td>' + day + '</td>';
-            });
-            html += '</tr>';
-
-            let i = 1;
-            do {
-                let dow = new Date(y, m, i).getDay();
-
-                if (dow === 1) {
-                    html += '<tr>';
-                } else if (i === 1) {
-                    html += '<tr>';
-                    let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                    for (let j = 0; j < firstDayOfMonth; j++) {
-                        html += '<td class="cell not-current">' + k + '</td>';
-                        k++;
-                    }
-                }
-
-                const chk = new Date();
-                const chkY = chk.getFullYear();
-                const chkM = chk.getMonth();
-                if (chkY === currYear && chkM === currMonth && i === currDay) {
-                    html += '<td class="cell today">' + i + '</td>';
-                } else {
-                    html += '<td class="cell normal">' + i + '</td>';
-                }
-
-                if (dow === 0) {
-                    html += '</tr>';
-                } else if (i === lastDateOfMonth) {
-                    let k = 1;
-                    for (dow; dow < 7; dow++) {
-                        html += '<td class="not-current">' + k + '</td>';
-                        k++;
-                    }
-                }
-
-                i++;
-            } while (i <= lastDateOfMonth);
-
-            html += '</table>';
-
-            getId(divId).innerHTML = html;
-        };
-
-        const dateHandler = () => {
-            const dayCell = document.querySelectorAll('.cell');
-            dayCell.forEach(element => {
-                element.addEventListener('click', (evt) => {
-
-                    dayCell.forEach(item => {
-                        item.classList.remove('today');
-                    });
-
-                    element.classList.add('today');
-                    const headerDate = document.querySelector('.header-date');
-                    const headerDateValue = headerDate.innerHTML;
-
-                    const formattedDate = formatDate(headerDateValue);
-                    let currentDay = evt.target.innerHTML;
-                    const daysTitle = document.querySelector('.holiday-titles');
-
-                    removeAllChildren(daysTitle);
-
-                    let date = formattedDate + '-' + currentDay;
-                    addHolidayContent(date);
+                dayCell.forEach(item => {
+                    item.classList.remove('today');
                 });
+
+                element.classList.add('today');
+                const headerDate = document.querySelector('.header-date');
+                const headerDateValue = headerDate.innerHTML;
+
+                const formattedDate = formatDate(headerDateValue);
+                let currentDay = evt.target.innerHTML;
+                const daysTitle = document.querySelector('.holiday-titles');
+
+                removeAllChildren(daysTitle);
+
+                let date = formattedDate + '-' + currentDay;
+                addHolidayContent(date);
             });
-        };
-
-        const nextMonth = () => {
-            if (currMonth === 11) {
-                currMonth = 0;
-                currYear++;
-            } else {
-                currMonth++;
-            }
-            showMonth(currYear, currMonth);
-            dateHandler();
-        };
-
-        const previousMonth = () => {
-            if (currMonth === 0) {
-                currMonth = 11;
-                currYear--;
-            } else {
-                currMonth--;
-            }
-            showMonth(currYear, currMonth);
-            dateHandler();
-        };
-
-        showMonth(currYear, currMonth);
-
-        getId('btnNext').onclick = nextMonth;
-        getId('btnPrev').onclick = previousMonth;
-        dateHandler();
+        });
     };
 
-    createCalendar("divCal");
+
+
 
     // ===================================================================================================
+
 
     function addHolidayContent(date) {
 
