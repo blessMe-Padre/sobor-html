@@ -40,7 +40,7 @@
 
 .time__image {
     position: relative;
-    z-index: 50;
+    z-index: 10;
 }
 
 .time__image iframe {
