@@ -11,12 +11,7 @@ export const initNav = () => {
         mobileMenu.classList.toggle('is-active');
         body.classList.toggle('lock');
         body.classList.toggle('is-active');
-
-        if (body.classList.contains('is-active')) {
-            body.addEventListener('click', evt => {
-                console.log(evt.target);
-            });
-        }
+        noiseSection.classList.toggle('is-active');
     });
 
     mobileMenuLinks.forEach(link => {
@@ -32,6 +27,8 @@ export const initNav = () => {
             menuButton.classList.remove('active');
             mobileMenu.classList.remove('is-active');
             body.classList.remove('is-active');
+            body.classList.remove('lock');
+            noiseSection.classList.remove('is-active');
         });
     }
 

@@ -1962,10 +1962,6 @@ body {
   max-width: 1440px;
 }
 
-.fixed{
-  position: fixed;
-}
-
 .relative{
   position: relative;
 }
@@ -2020,10 +2016,6 @@ body {
 
 .w-0{
   width: 0px;
-}
-
-.w-full{
-  width: 100%;
 }
 
 .min-w-full{
@@ -2085,11 +2077,6 @@ body {
 .bg-light-brown{
   --tw-bg-opacity: 1;
   background-color: rgb(237 235 229 / var(--tw-bg-opacity));
-}
-
-.bg-white{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .py-5{
@@ -2215,6 +2202,10 @@ body {
   width: 100%;
   height: 100vh;
   opacity: 1;
+  z-index: 1;
+}
+
+.noise.is-active {
   z-index: 18;
 }
 
@@ -2331,10 +2322,6 @@ body {
     display: none;
   }
 
-  .sm\:pt-28{
-    padding-top: 7rem;
-  }
-
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -2352,10 +2339,6 @@ body {
 
   .md\:max-w-full{
     max-width: 100%;
-  }
-
-  .md\:pt-52{
-    padding-top: 13rem;
   }
 
   .md\:text-lg{
