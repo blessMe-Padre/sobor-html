@@ -1373,6 +1373,17 @@ thead td {
   }
 }
 
+.test-page {
+  height: 600px;
+}
+
+.animate-element {
+  width: 100px;
+  height: 100px;
+  background-color: #41eb3b;
+  border-radius: 100%;
+}
+
 /* Импорт TailWind */
 
 /* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */
@@ -2074,9 +2085,19 @@ body {
   overflow: hidden;
 }
 
+.bg-brown{
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 210 194 / var(--tw-bg-opacity));
+}
+
 .bg-light-brown{
   --tw-bg-opacity: 1;
   background-color: rgb(237 235 229 / var(--tw-bg-opacity));
+}
+
+.bg-main-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(48 48 48 / var(--tw-bg-opacity));
 }
 
 .py-5{

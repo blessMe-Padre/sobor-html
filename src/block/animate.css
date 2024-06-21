@@ -1,0 +1,10 @@
+.test-page {
+    height: 600px;
+}
+
+.animate-element {
+    width: 100px;
+    height: 100px;
+    background-color: #41eb3b;
+    border-radius: 100%;
+}
