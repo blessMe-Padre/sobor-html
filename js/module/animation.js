@@ -6,6 +6,9 @@ export const initAnimation = () => {
         const sectionRect = section.getBoundingClientRect(); // Получаем размеры и положение секции относительно окна
         const windowHeight = window.innerHeight || document.documentElement.clientHeight; // Получаем высоту окна браузера
 
+        // Устанавливаем начальное значение translateX равное 0
+        animateElement.style.transform = 'translateX(0px)';
+
         // Проверяем, находится ли секция в видимой области окна браузера
         if (sectionRect.top <= windowHeight && sectionRect.bottom >= 0) {
             const sectionWidth = sectionRect.width; // Ширина секции
@@ -19,18 +22,15 @@ export const initAnimation = () => {
             // Вычисляем прогресс прокрутки внутри секции
             const scrollProgress = (scrollY - sectionTop) / (sectionHeight - windowHeight);
 
-            console.log(scrollProgress);
-
             // Ограничиваем прогресс прокрутки значениями от 0 до 1
             const boundedScrollProgress = Math.max(0, Math.min(1, scrollProgress));
 
             // Вычисляем смещение элемента по оси X
-            const translateX = maxTranslateX * boundedScrollProgress;
+            const translateX = (1190 + 60) - (maxTranslateX * boundedScrollProgress);
 
             // Применяем смещение к элементу
             animateElement.style.transform = `translateX(${translateX}px)`;
         }
     });
-
 };
 
