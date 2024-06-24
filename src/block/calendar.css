@@ -1,7 +1,8 @@
 .calendar-wrapper {
     width: 360px;
-    margin: 3em auto;
-    padding: 2em;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 0 2em;
     background: #fff;
 }
 
@@ -60,7 +61,7 @@ thead td {
 
 .calendar-button-wrapper {
     position: absolute;
-    top: 40px;
+    top: 0;
     left: 45px;
     width: 75%;
     margin: 0 auto;
@@ -203,5 +204,7 @@ thead td {
 }
 
 @media (max-width: 490px) {
-    .calendar-wrapper {}
+    .calendar {
+        padding-bottom: 0;
+    }
 }

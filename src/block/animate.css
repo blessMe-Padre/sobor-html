@@ -5,6 +5,50 @@
 .animate-element {
     width: 100px;
     height: 100px;
-    background-color: #41eb3b;
-    border-radius: 100%;
+}
+
+.animate-element-image {
+    width: 600px;
+    height: 400px;
+    max-width: 1200px;
+    position: relative;
+    left: -450px;
+}
+
+@media (max-width: 767px) {
+    .animate-element-image {
+        display: none;
+    }
+}
+
+.animate-element-2 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.animate-element-image-2 {
+    position: absolute;
+    top: 40%;
+    right: -200px;
+}
+
+@media (max-width: 900px) {
+    .animate-element-image-2 {
+        width: 340px;
+        height: 340px;
+        right: -100px;
+    }
+}
+
+@media (max-width: 450px) {
+    .animate-section {
+        display: none;
+    }
+
+    .animate-section-2 {
+        display: none;
+    }
 }

@@ -67,3 +67,11 @@
         grid-column: 1/2;
     }
 }
+
+@media (max-width: 450px) {
+    .footer {
+        padding-top: 0;
+        padding-bottom: 30px;
+    }
+
+}

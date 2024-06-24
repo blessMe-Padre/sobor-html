@@ -1,12 +1,13 @@
 export const initSlider = () => {
 
-    // слайдер "Отзывы"
+    // слайдер "Главный слайдер"
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
         const feedback = new Swiper('.hero-swiper', {
             loop: true,
             spaceBetween: 30,
             slidesPerView: 1,
+            speed: 2000,
 
             // navigation: {
             //     nextEl: '.swiper-button-next',
@@ -20,13 +21,14 @@ export const initSlider = () => {
         });
     }
 
-    // слайдер "Отзывы"
+    // слайдер "Новости"
     const newsSection = document.querySelector('.news');
     if (newsSection) {
         const feedback = new Swiper('.news-swiper', {
             loop: true,
             spaceBetween: 30,
             slidesPerView: 1,
+            speed: 2000,
 
             navigation: {
                 nextEl: '.news-button-next',

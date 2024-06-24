@@ -44,3 +44,9 @@
         margin-bottom: 50px;
     }
 }
+
+@media (max-width: 450px) {
+    .news {
+        padding-top: 50px;
+    }
+}

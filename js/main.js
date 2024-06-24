@@ -2,6 +2,7 @@ import { initNav } from "./module/nav.js";
 import { initSlider } from "./module/sliders.js";
 import { initCurrentYear } from "./module/current-year.js";
 // import { initScrollToTop } from "./module/scroll-to-top.js";
+import { initScrollAnimation } from "./module/scroll-animation.js";
 import { initScroll } from "./module/scroll.js";
 import { initCalendar } from "./module/calendar.js";
 import { initAnimation } from "./module/animation.js";
@@ -13,10 +14,11 @@ window.addEventListener('DOMContentLoaded', () => {
     initSlider();
     initCurrentYear();
     // initScrollToTop();
+    initScrollAnimation();
     initScroll();
     initAnimation();
 
-    if (document.querySelector('calendar')) {
+    if (document.querySelector('.calendar')) {
         initCalendar();
     }
 
