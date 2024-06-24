@@ -8,6 +8,9 @@ export const initSlider = () => {
             spaceBetween: 30,
             slidesPerView: 1,
             speed: 2000,
+            autoplay: {
+                delay: 4000,
+            },
 
             // navigation: {
             //     nextEl: '.swiper-button-next',
