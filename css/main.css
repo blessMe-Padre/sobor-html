@@ -921,6 +921,14 @@ button.swiper-pagination-bullet{
   min-height: 600px;
 }
 
+.hero__text {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .hero img {
   border-radius: 30px;
   position: absolute;
@@ -2056,12 +2064,12 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.mt-8{
-  margin-top: 2rem;
-}
-
 .mb-7{
   margin-bottom: 1.75rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
 }
 
 .block{
@@ -2404,16 +2412,12 @@ body {
 }
 
 @media (min-width: 768px){
-  .sm\:mb-4{
-    margin-bottom: 1rem;
-  }
-
-  .sm\:mb-10{
-    margin-bottom: 2.5rem;
-  }
-
   .sm\:mb-12{
     margin-bottom: 3rem;
+  }
+
+  .sm\:mb-4{
+    margin-bottom: 1rem;
   }
 
   .sm\:flex{
